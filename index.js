@@ -9,10 +9,6 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-app.use("/", (req, res) => {
-  res.json({ msg: "Your Kanban Board API is working fine!" });
-});
-
 app.use("/user", UserRouter);
 app.use("/task", TaskRouter);
 app.listen(process.env.port, async () => {
