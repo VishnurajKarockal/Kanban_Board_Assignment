@@ -42,30 +42,30 @@ TaskRouter.get("/", auth, access("regular user", "admin"), async (req, res) => {
 					.skip(skipval)
 					.limit(limitval),
 			})
+		} else {
+			if (userID && page) {
+				const limit = 10
+				const skipval = page * limit - limit
+				const limitval = page * limit
+				const tasks = await TaskModel.find({ userID: userID })
+					.skip(skipval)
+					.limit(limitval)
+				res.status(200).json({ tasks })
+			} else if (page) {
+				const limit = 10
+				const skipval = page * limit - limit
+				const limitval = page * limit
+				const tasks = await TaskModel.find().skip(skipval).limit(limitval)
+				res.status(200).json({ tasks })
+			} else {
+				console.log("aaaaaaaaaaaaaaaaaaaa")
+				const limit = 10
+				const skipval = page * limit - limit
+				const limitval = page * limit
+				const tasks = await TaskModel.find().skip(skipval).limit(limitval)
+				res.status(200).json({ tasks })
+			}
 		}
-		// else {
-		// 	if (userID && page) {
-		// 		const limit = 10
-		// 		const skipval = page * limit - limit
-		// 		const limitval = page * limit
-		// 		const tasks = await TaskModel.find({ userID: userID })
-		// 			.skip(skipval)
-		// 			.limit(limitval)
-		// 		res.status(200).json({ tasks })
-		// 	} else if (page) {
-		// 		const limit = 10
-		// 		const skipval = page * limit - limit
-		// 		const limitval = page * limit
-		// 		const tasks = await TaskModel.find().skip(skipval).limit(limitval)
-		// 		res.status(200).json({ tasks })
-		// 	} else {
-		// 		const limit = 10
-		// 		const skipval = page * limit - limit
-		// 		const limitval = page * limit
-		// 		const tasks = await TaskModel.find().skip(skipval).limit(limitval)
-		// 		res.status(200).json({ tasks })
-		// 	}
-		// }
 	} catch (error) {
 		res.status(400).json({ error })
 	}
