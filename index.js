@@ -8,6 +8,9 @@ const cors = require("cors")
 
 const app = express()
 app.use(cors())
+app.get("/", (req, res) => {
+	res.json({ msg: "Your kanban board api is working fine" })
+})
 
 app.use("/user", UserRouter)
 app.use("/task", TaskRouter)
