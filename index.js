@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
 app.use("/user", UserRouter)
 app.use("/task", TaskRouter)
 app.listen(process.env.port, async () => {
-	await connection
-	console.log(`Server is running at port ${process.env.port}`)
+	try {
+		await connection
+		console.log(`Server is running at port ${process.env.port}`)
+	} catch (error) {
+		console.log(error)
+	}
 })
